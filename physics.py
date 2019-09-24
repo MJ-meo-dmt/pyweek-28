@@ -19,7 +19,8 @@ class Physics():
 		#self.enableDebug()
 		self.start()
 		self.move_speed = 5.0
-		self.jump_speed = 5.0
+		self.jump_speed = 8.0
+		self.jump_height = 2.0
 
 	def enableDebug(self):
 		debugNode = BulletDebugNode('Debug')
@@ -50,16 +51,21 @@ class Physics():
 			speed.setY(-self.move_speed)
 
 		if inputState.isSet('space'):
-			self.checkFloorCollide()
-			if self.game.isFloating != True:
-				jump.setZ(self.jump_speed)
-				self.game.isFloating = True
-			elif self.game.isFloating == True:
-				jump.setZ(0.0)
+			self.doJump()
+			#if self.game.isFloating != True:
+			#	jump.setZ(self.jump_speed)
+			#	self.game.isFloating = True
+			#elif self.game.isFloating == True:
+			#	jump.setZ(0.0)
 				#self.game.isFloating = False
-		self.playerBody.node().setActive(True)
-		self.playerBody.node().applyCentralForce(speed)
-		self.playerBody.node().applyCentralImpulse(jump)
+		#self.playerBody.node().setActive(True)
+		self.playerBody.node().setLinearMovement(speed, True)#applyCentralForce(speed)
+		#self.playerBody.node().#applyCentralImpulse(jump)
+
+	def doJump(self):
+		self.game.player.body.node().setMaxJumpHeight(self.jump_height)
+		self.game.player.body.node().setJumpSpeed(self.jump_speed)
+		self.game.player.body.node().doJump()
 
 	def checkFloorCollide(self):
 		pos = Point3(self.game.player.playerRayNode.getPos(render))

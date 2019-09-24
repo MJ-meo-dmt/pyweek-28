@@ -18,16 +18,30 @@ class LevelLoader():
 
 		# Load Level
 		alight = AmbientLight('alight')
-		alight.setColor(VBase4(0.5, 0.5, 0.5, 1))
+		alight.setColor(VBase4(0.2, 0.2, 0.2, 1))
 		alnp = render.attachNewNode(alight)
 		render.setLight(alnp)
+		
+		#cube = loader.loadModel("models/cube.gltf")
+
 		# Point light
 		plight = PointLight('plight')
-		plight.setColor(VBase4(0.6, 0.6, 0.6, 1))
+		plight.setColor(VBase4(0.5, 0.7, 0.5, 1))
+		#plight.setShadowCaster(True, 512, 512)
 		#plight.setAttenuation(Point3(0, 0, 0.5))
 		plnp = render.attachNewNode(plight)
-		plnp.setPos(0, 0, 30)
+		plnp.setPos(10, 10, 15)
+		plnp.showBounds()
 		render.setLight(plnp)
+		#cube.reparentTo(plnp)
+
+		plight2 = PointLight('plight2')
+		plight2.setColor(VBase4(0.8, 0.5, 0.5, 1))
+		#plight2.setShadowCaster(True, 512, 512)
+		#plight.setAttenuation(Point3(0, 0, 0.5))
+		plnp2 = render.attachNewNode(plight2)
+		plnp2.setPos(10, 10, 25)
+		render.setLight(plnp2)
 
 		self.jumpFrom = []
 
@@ -47,7 +61,7 @@ class LevelLoader():
 
 		for x in range(10):
 			for y in range(10):
-				for z in range(30):
+				for z in range(40):
 					if x == randrange(0, 10):
 						placeholder = render.attachNewNode("cube"+str(x))
 						placeholder.setPos(x+x, y+y, z+z)
@@ -58,6 +72,7 @@ class LevelLoader():
 						body = BulletRigidBodyNode('cube_body')
 						body.addShape(shape)
 						body.setMass(0)
+						body.setStatic(True)
 
 						np = render.attachNewNode(body)
 						np.setCollideMask(BitMask32.allOn())

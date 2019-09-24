@@ -24,9 +24,12 @@ class Player():
         inputState.watchWithModifiers('space', 'space')
 
         shape = BulletBoxShape(Vec3(0.5, 0.5, 0.5))
-        body = BulletRigidBodyNode('player')
-        body.addShape(shape)
-        body.setMass(1)
+        body = BulletCharacterControllerNode(shape, 0.5, 'player') #BulletRigidBodyNode('player')
+
+        #body.addShape(shape)
+        #body.setMass(1)
+        #body.setKinematic(True)
+
         
         self.body = render.attachNewNode(body)
         self.body.setPos(0, 0, 1)
@@ -38,7 +41,7 @@ class Player():
         self.playerModel.setPos(0, 0, 0.5)
         self.playerModel.reparentTo(self.body)
       
-        self.game.physics.physicsWorld.attachRigidBody(body)
+        self.game.physics.physicsWorld.attachCharacter(body)
         
         playerRayNode = self.body.attachNewNode("ray-dummy")
         playerRayNode.setCompass()
@@ -52,12 +55,12 @@ class Player():
         base.camera.reparentTo(self.body)
         #base.camera.setPos(0, 5, 0)
         base.camLens.setFov(90)
-        base.camLens.setNear(0.5)
+        base.camLens.setNear(0.1)
         
         
-        self.mouseSpeedX = 3
-        self.mouseSpeedY = 2
-        self.camP = 10
+        self.mouseSpeedX = 11
+        self.mouseSpeedY = 0.2
+        self.camP = 5
         
         
     def getMouse(self, dt):
@@ -66,12 +69,11 @@ class Player():
         md = base.win.getPointer(0)
         x = md.getX()
         y = md.getY()
-        deltaX = x - 200
-        deltaY = y - 200
         
         if base.win.movePointer(0, self.winXhalf, self.winYhalf):
             omega = (x - self.winXhalf)*-self.mouseSpeedX
-            #self.body.node().setAngularVelocity(Vec3(0, 0, omega))
+            #print(omega)
+            self.body.node().setAngularMovement(omega)
             #self.body.setH(self.body.getH() - 0.3* x)
             cam = base.cam.getP() - (y - self.winYhalf) * self.mouseSpeedY
             if cam <-80:
@@ -79,9 +81,9 @@ class Player():
             elif cam > 90:
                 cam = 90
             base.cam.setP(cam)
-            base.camera.setY(base.camera, 8.0)
+            #base.camera.setY(base.camera, 8.0)
 
-        base.camera.lookAt(self.body)
+        #base.camera.lookAt(self.body)
 
     def update(self, dt):
         self.getMouse(dt)
