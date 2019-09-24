@@ -8,7 +8,7 @@ loadPrcFileData("",
     load-display pandagl
     fullscreen 0
     win-size 1024 768
-    cursor-hidden 0
+    cursor-hidden 1
     sync-video 0
     show-frame-rate-meter 1
 """

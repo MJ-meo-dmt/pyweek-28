@@ -77,6 +77,7 @@ class Physics():
 		dt = globalClock.getDt()
 		self.physicsWorld.doPhysics(dt, 5, 1.0/240.0)
 		self.movement()
+		self.game.player.update(dt)
 
 		return task.cont
 
