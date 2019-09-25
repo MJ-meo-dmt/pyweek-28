@@ -15,7 +15,7 @@ class Physics():
 
 		# Physics World
 		self.physicsWorld = BulletWorld()
-		self.physicsWorld.setGravity(0, 0, -10)
+		self.physicsWorld.setGravity(0, 0, -9.81)
 		#self.enableDebug()
 		self.start()
 		self.move_speed = 5.0

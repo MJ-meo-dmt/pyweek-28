@@ -58,12 +58,14 @@ class LevelLoader():
 
 		# Physics Mesh
 		
+		#print(noise.noise(1, 1, 1))
 
 		for x in range(10):
 			for y in range(10):
-				for z in range(40):
+				for z in range(45):
 					prop = randrange(0, 100) / 100
-					if prop <= 0.1:
+					#noise = PerlinNoise3(0.3, 0.3, 0.3)
+					if prop <= 0.1:#noise.noise(x, y, z) >= 0.35:
 						placeholder = render.attachNewNode("cube"+str(x))
 						placeholder.setPos(x+x, y+y, z+z)
 						cube.instanceTo(placeholder)

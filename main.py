@@ -34,7 +34,7 @@ class TowerRunner(ShowBase):
         #render.setAttrib(CullFaceAttrib.make(CullFaceAttrib.MCullClockwise))
         #render.setAntialias(AntialiasAttrib.MMultisample)
         #render.setAttrib(LightRampAttrib.makeSingleThreshold(0.5, 0.8))
-        print(render.ls())
+        #print(render.ls())
 
 
 app = TowerRunner()
