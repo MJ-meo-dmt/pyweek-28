@@ -15,7 +15,7 @@ class Physics():
 
 		# Physics World
 		self.physicsWorld = BulletWorld()
-		self.physicsWorld.setGravity(0, 0, -9)
+		self.physicsWorld.setGravity(0, 0, -10)
 		#self.enableDebug()
 		self.start()
 		self.move_speed = 5.0
@@ -81,7 +81,7 @@ class Physics():
 
 	def update(self, task):
 		dt = globalClock.getDt()
-		self.physicsWorld.doPhysics(dt, 5, 1.0/240.0)
+		self.physicsWorld.doPhysics(dt)#, 5, 1.0/240.0)
 		self.movement()
 		self.game.player.update(dt)
 

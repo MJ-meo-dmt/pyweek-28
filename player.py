@@ -58,8 +58,8 @@ class Player():
         base.camLens.setNear(0.1)
         
         
-        self.mouseSpeedX = 11
-        self.mouseSpeedY = 0.2
+        self.mouseSpeedX = 3
+        self.mouseSpeedY = 0.1
         self.camP = 5
         
         
@@ -75,7 +75,7 @@ class Player():
             #print(omega)
             self.body.node().setAngularMovement(omega)
             #self.body.setH(self.body.getH() - 0.3* x)
-            cam = base.cam.getP() - (y - self.winYhalf) * self.mouseSpeedY
+            cam = base.cam.getP() - (y - self.winYhalf) * self.mouseSpeedY / 2
             if cam <-80:
                 cam = -80
             elif cam > 90:

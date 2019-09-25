@@ -11,6 +11,7 @@ loadPrcFileData("",
     cursor-hidden 1
     sync-video 0
     show-frame-rate-meter 1
+    threading-model Cull/Draw
 """
 )
 
@@ -30,6 +31,8 @@ class TowerRunner(ShowBase):
         filters = CommonFilters(base.win, base.cam)
         filters.setBloom()
         filters.setCartoonInk()
+        #render.setAttrib(CullFaceAttrib.make(CullFaceAttrib.MCullClockwise))
+        #render.setAntialias(AntialiasAttrib.MMultisample)
         #render.setAttrib(LightRampAttrib.makeSingleThreshold(0.5, 0.8))
         print(render.ls())
 

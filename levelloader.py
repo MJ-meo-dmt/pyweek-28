@@ -62,7 +62,8 @@ class LevelLoader():
 		for x in range(10):
 			for y in range(10):
 				for z in range(40):
-					if x == randrange(0, 10):
+					prop = randrange(0, 100) / 100
+					if prop <= 0.1:
 						placeholder = render.attachNewNode("cube"+str(x))
 						placeholder.setPos(x+x, y+y, z+z)
 						cube.instanceTo(placeholder)
