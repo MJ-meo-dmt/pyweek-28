@@ -18,11 +18,16 @@ class LevelLoader():
 
 		# Load Level
 		alight = AmbientLight('alight')
-		alight.setColor(VBase4(0.2, 0.2, 0.2, 1))
+		alight.setColor(VBase4(0.1, 0.1, 0.1, 1))
 		alnp = render.attachNewNode(alight)
 		render.setLight(alnp)
 		
 		#cube = loader.loadModel("models/cube.gltf")
+		dlight = DirectionalLight('dlight')
+		dlight.setColor(VBase4(0.9, 0.9, 0.8, 1))
+		dlnp = render.attachNewNode(dlight)
+		dlnp.setHpr(0, -60, 0)
+		render.setLight(dlnp)
 
 		# Point light
 		plight = PointLight('plight')
@@ -31,7 +36,7 @@ class LevelLoader():
 		#plight.setAttenuation(Point3(0, 0, 0.5))
 		plnp = render.attachNewNode(plight)
 		plnp.setPos(10, 10, 15)
-		plnp.showBounds()
+		#plnp.showBounds()
 		render.setLight(plnp)
 		#cube.reparentTo(plnp)
 
@@ -56,6 +61,7 @@ class LevelLoader():
 		cube.setPos(0, 0, 0)
 		cubes = NodePath('Cubes')
 
+		coin = loader.loadModel("models/coin.gltf")
 		# Physics Mesh
 		
 		#print(noise.noise(1, 1, 1))
@@ -63,11 +69,22 @@ class LevelLoader():
 		for x in range(10):
 			for y in range(10):
 				for z in range(45):
-					prop = randrange(0, 100) / 100
+					prop = randrange(0, 50) / 40
 					#noise = PerlinNoise3(0.3, 0.3, 0.3)
 					if prop <= 0.1:#noise.noise(x, y, z) >= 0.35:
+						randomOffset = randrange(0, 4)
+
 						placeholder = render.attachNewNode("cube"+str(x))
-						placeholder.setPos(x+x, y+y, z+z)
+						placeholder.setPos(x+x+randomOffset, y+y+randomOffset, z+z)
+
+						coin_chance = randrange(0, 100) / 100
+						if coin_chance <= 0.1:
+							coinholder = render.attachNewNode("coin"+str(y))
+							coinholder.setPos(x+x+randomOffset, y+y+randomOffset, z+z+1)
+							coinholder.setR(90)
+							coinholder.setScale(0.5)
+							coin.instanceTo(coinholder)
+
 						cube.instanceTo(placeholder)
 
 						shape = BulletBoxShape(Vec3(1, 1, 1))
@@ -79,7 +96,7 @@ class LevelLoader():
 
 						np = render.attachNewNode(body)
 						np.setCollideMask(BitMask32.allOn())
-						np.setPos(x+x, y+y, z+z-1)
+						np.setPos(x+x+randomOffset, y+y+randomOffset, z+z-1)
 						self.physicsWorld.attachRigidBody(body)
 						self.jumpFrom.append(body)
 

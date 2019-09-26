@@ -7,7 +7,7 @@ loadPrcFileData("",
     window-title Tower Runner
     load-display pandagl
     fullscreen 0
-    win-size 1024 768
+    win-size 1920 1080
     cursor-hidden 1
     sync-video 0
     show-frame-rate-meter 1
@@ -21,11 +21,16 @@ from panda3d.core import *
 
 # Game Imports
 from game import Game
+from gui import GUI
 
 
 class TowerRunner(ShowBase):
     def __init__(self):
         ShowBase.__init__(self)
+
+        # Gui
+        #gui = GUI(self)
+
         render.setShaderAuto()
         self.game = Game(self)
         filters = CommonFilters(base.win, base.cam)
