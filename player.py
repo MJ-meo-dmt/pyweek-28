@@ -22,6 +22,7 @@ class Player():
         inputState.watchWithModifiers('left', 'a')
         inputState.watchWithModifiers('right', 'd')
         inputState.watchWithModifiers('space', 'space')
+        inputState.watchWithModifiers('esc', 'escape')
 
         shape = BulletBoxShape(Vec3(0.5, 0.5, 0.5))
         body = BulletCharacterControllerNode(shape, 0.5, 'player') #BulletRigidBodyNode('player')

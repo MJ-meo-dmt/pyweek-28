@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 # System Imports
+import sys
 # Panda3d Imports
 from panda3d.bullet import *
 from panda3d.core import *
@@ -84,6 +85,8 @@ class Physics():
 		self.physicsWorld.doPhysics(dt)#, 5, 1.0/240.0)
 		self.movement()
 		self.game.player.update(dt)
+		if inputState.isSet('esc'):
+			sys.exit()
 
 		return task.cont
 

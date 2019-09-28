@@ -61,7 +61,7 @@ class LevelLoader():
 		cube.setPos(0, 0, 0)
 		cubes = NodePath('Cubes')
 
-		coin = loader.loadModel("models/coin.gltf")
+		#coin = loader.loadModel("models/coin.gltf")
 		# Physics Mesh
 		
 		#print(noise.noise(1, 1, 1))
@@ -77,13 +77,13 @@ class LevelLoader():
 						placeholder = render.attachNewNode("cube"+str(x))
 						placeholder.setPos(x+x+randomOffset, y+y+randomOffset, z+z)
 
-						coin_chance = randrange(0, 100) / 100
-						if coin_chance <= 0.1:
-							coinholder = render.attachNewNode("coin"+str(y))
-							coinholder.setPos(x+x+randomOffset, y+y+randomOffset, z+z+1)
-							coinholder.setR(90)
-							coinholder.setScale(0.5)
-							coin.instanceTo(coinholder)
+						#coin_chance = randrange(0, 100) / 100
+						#if coin_chance <= 0.1:
+						#	coinholder = render.attachNewNode("coin"+str(y))
+						#	coinholder.setPos(x+x+randomOffset, y+y+randomOffset, z+z+1)
+						#	coinholder.setR(90)
+						#	coinholder.setScale(0.5)
+						#	coin.instanceTo(coinholder)
 
 						cube.instanceTo(placeholder)
 
